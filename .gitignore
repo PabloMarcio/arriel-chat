@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/arriel-chat/v17
+/arriel.chat/.vs/arriel.chat/DesignTimeBuild
+/arriel.chat/.vs/arriel.chat/FileContentIndex
+/arriel.chat/.vs/arriel.chat/v17
+/arriel.chat/.vs/ProjectEvaluation
+/arriel.chat/arriel.chat.application/bin/Debug/net6.0
+/arriel.chat/arriel.chat.application/obj
+/arriel.chat/arriel.chat.domain/bin/Debug/net6.0
+/arriel.chat/arriel.chat.domain/obj
+/arriel.chat/arriel.chat.infrastructure/bin/Debug/net6.0
+/arriel.chat/arriel.chat.infrastructure/obj

@@ -22,6 +22,7 @@ namespace arriel.chat.application.Classes
         {
             _tcpCliente = tcpCliente;
             _serverAppService = serverAppService;
+            AceitarCliente();
         }
 
         private void AceitarCliente()
@@ -74,11 +75,12 @@ namespace arriel.chat.application.Classes
                 while ((resposta = receptor.ReadLine()) != "")
                 {
                     // Se for inválido remove-o
-                    if (resposta == null)
-                    {
-                        _serverAppService.RemoverUsuario(_tcpCliente);
-                    }
-                    else
+                    //if (resposta == null)
+                    //{
+                    //    _serverAppService.RemoverUsuario(_tcpCliente);
+                    //}
+                    //else
+                    if (resposta != null)
                     {
                         // envia a mensagem para todos os outros usuários
                         _serverAppService.EnviarMensagem(usuarioAtual, resposta);

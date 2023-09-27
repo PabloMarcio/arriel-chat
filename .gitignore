@@ -13,3 +13,7 @@
 /arriel.chat/arriel.chat.domain/obj
 /arriel.chat/arriel.chat.infrastructure/bin/Debug/net6.0
 /arriel.chat/arriel.chat.infrastructure/obj
+/arriel.chat/arriel.chat.client/bin/Debug/net6.0-windows
+/arriel.chat/arriel.chat.client/obj
+/arriel.chat/arriel.chat.server/bin/Debug/net6.0
+/arriel.chat/arriel.chat.server/obj

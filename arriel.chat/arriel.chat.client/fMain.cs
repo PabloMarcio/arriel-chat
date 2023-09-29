@@ -7,14 +7,13 @@ namespace arriel.chat.client
     public partial class fMain : Form
     {
         private bool _conectado = false;
+        public bool RecebeuMensagemNova = false;
         public bool Conectado
         {
             get { return _conectado; }
             private set
             {
                 _conectado = value;
-                lblStatusConexao.Text = _conectado ? $"Conectado como {Apelido}" : "Desconectado";
-                lblStatusConexao.ForeColor = _conectado ? Color.DarkGreen : Color.DarkRed;
             }
         }
 
@@ -56,6 +55,8 @@ namespace arriel.chat.client
 
         private void Desconectar(string motivo)
         {
+            Remetente.WriteLine("/quit");
+            Remetente.Flush();
             AtualizarLog(motivo);
             FecharConexao(motivo);
         }
@@ -65,7 +66,15 @@ namespace arriel.chat.client
             var enderecoIP = IPAddress.Parse(txtServidor.Text);
 
             TcpServidor = new TcpClient();
-            TcpServidor.Connect(enderecoIP, 2502);
+            try
+            {
+                TcpServidor.Connect(enderecoIP, 2502);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Servidor está inacessível. Tente novamente em alguns minutos");
+            }
+
             Conectado = true;
             Apelido = txtApelido.Text;
 
@@ -107,7 +116,7 @@ namespace arriel.chat.client
             }
 
             while (Conectado)
-            {         
+            {
                 try
                 {
                     AtualizarLog(Receptor.ReadLine());
@@ -116,22 +125,13 @@ namespace arriel.chat.client
                 {
                     FecharConexao(ex.Message);
                 }
-                
+
             }
         }
 
         private void FecharConexao(string motivo)
         {
-            Instance.txtServidor.Enabled = true;
-            Instance.txtApelido.Enabled = true;
-            Instance.txtMensagem.Enabled = false;
-            Instance.btnEnviar.Enabled = false;
-            Instance.btnConectar.Text = "Conectar";
-
             Conectado = false;
-            Remetente.Close();
-            Receptor.Close();
-            TcpServidor.Close();
         }
 
         private void AtualizarLog(string mensagem)
@@ -141,6 +141,7 @@ namespace arriel.chat.client
                 return;
             }
             ChatLog.TextLog += mensagem + "\r\n";
+            RecebeuMensagemNova = true;
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -156,8 +157,8 @@ namespace arriel.chat.client
             {
                 return;
             }
-            if (mensagem.Trim().StartsWith("/") == false) 
-            { 
+            if (mensagem.Trim().StartsWith("/") == false)
+            {
                 mensagem = $"/msg {mensagem}";
             }
             Remetente.WriteLine(mensagem);
@@ -179,7 +180,42 @@ namespace arriel.chat.client
             {
                 txtLog.Text = ChatLog.TextLog;
             }
-                
+
+            if (RecebeuMensagemNova)
+            {
+                txtLog.SelectionStart = txtLog.Text.Length;
+                txtLog.ScrollToCaret();
+                RecebeuMensagemNova = false;
+            }
+
+        }
+
+        private void tmrStatusConexao_Tick(object sender, EventArgs e)
+        {
+            Instance.txtServidor.Enabled = !Conectado;
+            Instance.txtApelido.Enabled = !Conectado;
+            Instance.txtMensagem.Enabled = Conectado;
+            Instance.btnEnviar.Enabled = Conectado;
+            Instance.btnConectar.Text = !Conectado ? "Conectar" : "Sair";
+            lblStatusConexao.Text = Conectado ? $"Conectado como {Apelido}" : "Desconectado";
+            lblStatusConexao.ForeColor = Conectado ? Color.DarkGreen : Color.DarkRed;
+
+            if (!Conectado)
+            {
+                try
+                {
+                    Apelido = "";
+                    Remetente?.Close();
+                    Receptor?.Close();
+                    TcpServidor?.Close();
+                }
+                catch
+                {
+                    return;
+                }
+            }
+
+
         }
     }
 }

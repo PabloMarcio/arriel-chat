@@ -39,6 +39,7 @@
             txtMensagem = new TextBox();
             btnEnviar = new Button();
             tmrUpdateLog = new System.Windows.Forms.Timer(components);
+            tmrStatusConexao = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // txtServidor
@@ -85,11 +86,13 @@
             // 
             // txtLog
             // 
+            txtLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtLog.Enabled = false;
             txtLog.Location = new Point(12, 58);
             txtLog.Multiline = true;
             txtLog.Name = "txtLog";
-            txtLog.Size = new Size(612, 306);
+            txtLog.ScrollBars = ScrollBars.Vertical;
+            txtLog.Size = new Size(639, 359);
             txtLog.TabIndex = 5;
             // 
             // lblStatusConexao
@@ -102,17 +105,19 @@
             // 
             // txtMensagem
             // 
+            txtMensagem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtMensagem.Enabled = false;
-            txtMensagem.Location = new Point(12, 373);
+            txtMensagem.Location = new Point(12, 426);
             txtMensagem.Name = "txtMensagem";
-            txtMensagem.Size = new Size(528, 23);
+            txtMensagem.Size = new Size(555, 23);
             txtMensagem.TabIndex = 7;
             txtMensagem.KeyPress += txtMensagem_KeyPress;
             // 
             // btnEnviar
             // 
+            btnEnviar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnEnviar.Enabled = false;
-            btnEnviar.Location = new Point(549, 373);
+            btnEnviar.Location = new Point(576, 426);
             btnEnviar.Name = "btnEnviar";
             btnEnviar.Size = new Size(75, 23);
             btnEnviar.TabIndex = 8;
@@ -125,11 +130,16 @@
             tmrUpdateLog.Enabled = true;
             tmrUpdateLog.Tick += tmrUpdateLog_Tick;
             // 
+            // tmrStatusConexao
+            // 
+            tmrStatusConexao.Enabled = true;
+            tmrStatusConexao.Tick += tmrStatusConexao_Tick;
+            // 
             // fMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(636, 408);
+            ClientSize = new Size(663, 461);
             Controls.Add(btnEnviar);
             Controls.Add(txtMensagem);
             Controls.Add(lblStatusConexao);
@@ -157,5 +167,6 @@
         private TextBox txtMensagem;
         private Button btnEnviar;
         private System.Windows.Forms.Timer tmrUpdateLog;
+        private System.Windows.Forms.Timer tmrStatusConexao;
     }
 }

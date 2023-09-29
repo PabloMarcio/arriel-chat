@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtServidor = new TextBox();
             txtApelido = new TextBox();
             lblServidor = new Label();
@@ -37,6 +38,7 @@
             lblStatusConexao = new Label();
             txtMensagem = new TextBox();
             btnEnviar = new Button();
+            tmrUpdateLog = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // txtServidor
@@ -118,6 +120,11 @@
             btnEnviar.UseVisualStyleBackColor = true;
             btnEnviar.Click += btnEnviar_Click;
             // 
+            // tmrUpdateLog
+            // 
+            tmrUpdateLog.Enabled = true;
+            tmrUpdateLog.Tick += tmrUpdateLog_Tick;
+            // 
             // fMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,5 +156,6 @@
         private Label lblStatusConexao;
         private TextBox txtMensagem;
         private Button btnEnviar;
+        private System.Windows.Forms.Timer tmrUpdateLog;
     }
 }

@@ -3,15 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arriel.chat.infrastructure", "arriel.chat.infrastructure\arriel.chat.infrastructure.csproj", "{23E84BFE-85D7-42DF-AF40-F5FCAE76D980}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arriel.chat.server", "arriel.chat.server\arriel.chat.server.csproj", "{45D51500-AD66-4540-8D15-B6F4DB48798C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arriel.chat.domain", "arriel.chat.domain\arriel.chat.domain.csproj", "{8443116E-EF68-49D9-88D1-A81D356F0E5E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arriel.chat.application", "arriel.chat.application\arriel.chat.application.csproj", "{129F0D9F-5425-4F90-907C-A92E0BAEDD76}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arriel.chat.server", "arriel.chat.server\arriel.chat.server.csproj", "{45D51500-AD66-4540-8D15-B6F4DB48798C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arriel.chat.client", "arriel.chat.client\arriel.chat.client.csproj", "{2DCF586F-2E26-4149-9F82-0C3D61B7A572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arriel.chat.client", "arriel.chat.client\arriel.chat.client.csproj", "{2DCF586F-2E26-4149-9F82-0C3D61B7A572}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{23E84BFE-85D7-42DF-AF40-F5FCAE76D980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23E84BFE-85D7-42DF-AF40-F5FCAE76D980}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23E84BFE-85D7-42DF-AF40-F5FCAE76D980}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23E84BFE-85D7-42DF-AF40-F5FCAE76D980}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8443116E-EF68-49D9-88D1-A81D356F0E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8443116E-EF68-49D9-88D1-A81D356F0E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8443116E-EF68-49D9-88D1-A81D356F0E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8443116E-EF68-49D9-88D1-A81D356F0E5E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{129F0D9F-5425-4F90-907C-A92E0BAEDD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{129F0D9F-5425-4F90-907C-A92E0BAEDD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{129F0D9F-5425-4F90-907C-A92E0BAEDD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{129F0D9F-5425-4F90-907C-A92E0BAEDD76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{45D51500-AD66-4540-8D15-B6F4DB48798C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{45D51500-AD66-4540-8D15-B6F4DB48798C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45D51500-AD66-4540-8D15-B6F4DB48798C}.Release|Any CPU.ActiveCfg = Release|Any CPU

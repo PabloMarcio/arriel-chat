@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\arriel.chat.application\arriel.chat.application.csproj" />
-  </ItemGroup>
-
 </Project>

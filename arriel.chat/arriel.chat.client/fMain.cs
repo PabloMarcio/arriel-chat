@@ -1,5 +1,6 @@
 using System.Net.Sockets;
 using System.Net;
+using arriel.chat.client.Classes;
 
 namespace arriel.chat.client
 {
@@ -22,11 +23,15 @@ namespace arriel.chat.client
         public TcpClient TcpServidor { get; private set; }
         public StreamWriter Remetente { get; private set; }
         public StreamReader Receptor { get; private set; }
+        public static fMain Instance { get; private set; }
 
         public fMain()
         {
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
+            ChatLog.TextLog = "";
             InitializeComponent();
+            txtServidor.Text = "127.0.0.1";
+            Instance = this;
         }
 
         private void OnApplicationExit(object? sender, EventArgs e)
@@ -64,15 +69,20 @@ namespace arriel.chat.client
             Conectado = true;
             Apelido = txtApelido.Text;
 
-            txtServidor.Enabled = false;
-            txtApelido.Enabled = false;
-            btnConectar.Text = "Sair";
-            txtMensagem.Enabled = true;
-            btnEnviar.Enabled = true;
-            txtLog.Enabled = true;
+            Instance.txtServidor.Enabled = false;
+            Instance.txtApelido.Enabled = false;
+            Instance.btnConectar.Text = "Sair";
+            Instance.txtMensagem.Enabled = true;
+            Instance.btnEnviar.Enabled = true;
+            Instance.txtLog.Enabled = true;
 
             Remetente = new StreamWriter(TcpServidor.GetStream());
-            Remetente.WriteLine(Apelido);
+            if (Apelido.Contains(" "))
+            {
+                Apelido.Replace("\"", "");
+                Apelido = $@"""{Apelido}""";
+            }
+            Remetente.WriteLine($"/join {Apelido}");
             Remetente.Flush();
 
             //Inicia a thread para receber mensagens e nova comunicação
@@ -86,7 +96,7 @@ namespace arriel.chat.client
             string resposta = Receptor.ReadLine();
             if (resposta[0] == '1')
             {
-                AtualizarLog("Conectado com sucesso!");
+                AtualizarLog("Conectado com sucesso. Digite /help para obter ajuda com os comandos disponíveis");
             }
             else
             {
@@ -97,18 +107,26 @@ namespace arriel.chat.client
             }
 
             while (Conectado)
-            {
-                AtualizarLog(Receptor.ReadLine());
+            {         
+                try
+                {
+                    AtualizarLog(Receptor.ReadLine());
+                }
+                catch (Exception ex)
+                {
+                    FecharConexao(ex.Message);
+                }
+                
             }
         }
 
         private void FecharConexao(string motivo)
         {
-            txtServidor.Enabled = true;
-            txtApelido.Enabled = true;
-            txtMensagem.Enabled = false;
-            btnEnviar.Enabled = false;
-            btnConectar.Text = "Conectar";
+            Instance.txtServidor.Enabled = true;
+            Instance.txtApelido.Enabled = true;
+            Instance.txtMensagem.Enabled = false;
+            Instance.btnEnviar.Enabled = false;
+            Instance.btnConectar.Text = "Conectar";
 
             Conectado = false;
             Remetente.Close();
@@ -118,7 +136,11 @@ namespace arriel.chat.client
 
         private void AtualizarLog(string mensagem)
         {
-            txtLog.AppendText(mensagem + "\r\n");
+            if (string.IsNullOrEmpty(mensagem))
+            {
+                return;
+            }
+            ChatLog.TextLog += mensagem + "\r\n";
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -134,6 +156,10 @@ namespace arriel.chat.client
             {
                 return;
             }
+            if (mensagem.Trim().StartsWith("/") == false) 
+            { 
+                mensagem = $"/msg {mensagem}";
+            }
             Remetente.WriteLine(mensagem);
             Remetente.Flush();
             txtMensagem.Clear();
@@ -145,6 +171,15 @@ namespace arriel.chat.client
             {
                 EnviarMensagem(txtMensagem.Text);
             }
+        }
+
+        private void tmrUpdateLog_Tick(object sender, EventArgs e)
+        {
+            if (txtLog.Text != ChatLog.TextLog)
+            {
+                txtLog.Text = ChatLog.TextLog;
+            }
+                
         }
     }
 }

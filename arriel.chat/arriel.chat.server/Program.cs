@@ -15,7 +15,7 @@ namespace arriel.chat.server
         {
             Console.Clear();
             Console.WriteLine("arriel.chat.server iniciado");
-            var listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 2502);
+            var listener = new TcpListener(IPAddress.Any, 2502);
             listener.Start();
             Console.WriteLine("Escutando mensagens...");
             while (true)

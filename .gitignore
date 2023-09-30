@@ -17,3 +17,5 @@
 /arriel.chat/arriel.chat.client/obj
 /arriel.chat/arriel.chat.server/bin/Debug/net6.0
 /arriel.chat/arriel.chat.server/obj
+/arriel.chat/arriel.chat.client/bin/Release/net6.0-windows
+/arriel.chat/arriel.chat.server/bin/Release/net6.0
